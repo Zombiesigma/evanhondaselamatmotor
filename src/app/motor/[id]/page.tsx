@@ -8,7 +8,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CreditCalculator } from '@/components/CreditCalculator';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, Plus, ShieldCheck, Loader2, ChevronRight, Palette, CheckCircle2, Zap } from 'lucide-react';
+import { ChevronLeft, Plus, ShieldCheck, Loader2, ChevronRight, Zap, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { useFirestore, useDoc } from '@/firebase';
 import { doc } from 'firebase/firestore';
@@ -23,6 +23,30 @@ export default function MotorcycleDetailPage({ params }: { params: Promise<{ id:
 
   const [activeVariantIndex, setActiveVariantIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  // Memoize the gallery logic to prevent "Error 310" by keeping hooks unconditional
+  const finalGallery = useMemo(() => {
+    if (!bike) return [];
+    
+    let images: string[] = [];
+    
+    // 1. Add Main Image if it's a real URL
+    if (bike.image?.startsWith('http')) {
+      images.push(bike.image);
+    }
+    
+    // 2. Add Gallery URLs
+    const galleryUrls = (bike.gallery || []).filter((url: string) => url?.startsWith('http'));
+    images = [...images, ...galleryUrls];
+    
+    // 3. Fallback to placeholder ONLY if we have ZERO real images
+    if (images.length === 0) {
+      const placeholder = PlaceHolderImages.find(img => img.id === bike.image)?.imageUrl || PlaceHolderImages[0].imageUrl;
+      images.push(placeholder);
+    }
+    
+    return images;
+  }, [bike]);
 
   if (loading) {
     return (
@@ -55,28 +79,6 @@ export default function MotorcycleDetailPage({ params }: { params: Promise<{ id:
   const activeVariant = bike.variants && bike.variants[activeVariantIndex] 
     ? bike.variants[activeVariantIndex] 
     : { name: 'Standard', price: bike.startingPrice || 0, color: 'Base' };
-
-  // Logic: Only use placeholders if no real URLs are available in image or gallery
-  const mainImgIsPlaceholder = !bike.image?.startsWith('http');
-  const galleryUrls = (bike.gallery || []).filter((url: string) => url.startsWith('http'));
-  
-  const finalGallery = useMemo(() => {
-    let images: string[] = [];
-    
-    if (bike.image?.startsWith('http')) {
-      images.push(bike.image);
-    }
-    
-    images = [...images, ...galleryUrls];
-    
-    // If we have NO real images at all, use the placeholder logic
-    if (images.length === 0) {
-      const placeholder = PlaceHolderImages.find(img => img.id === bike.image)?.imageUrl || PlaceHolderImages[0].imageUrl;
-      images.push(placeholder);
-    }
-    
-    return images;
-  }, [bike.image, galleryUrls]);
 
   const description = language === 'id' ? bike.description_id : bike.description_en;
   const features = language === 'id' ? (bike.features_id || []) : (bike.features_en || []);
@@ -152,7 +154,7 @@ export default function MotorcycleDetailPage({ params }: { params: Promise<{ id:
             <div className="space-y-10 animate-scale-entry">
                <div className="relative aspect-[16/11] bg-[#fdfdfd] rounded-[60px] shadow-[0_60px_120px_rgba(0,0,0,0.08)] overflow-hidden border border-gray-50 p-4 group">
                   <Image 
-                    src={finalGallery[activeImageIndex] || finalGallery[0]} 
+                    src={finalGallery[activeImageIndex] || finalGallery[0] || 'https://picsum.photos/seed/honda/800/600'} 
                     alt={bike.name} 
                     fill 
                     className="object-cover rounded-[50px] transition-all duration-1000 group-hover:scale-105"
@@ -188,7 +190,7 @@ export default function MotorcycleDetailPage({ params }: { params: Promise<{ id:
                 <div className="flex flex-col gap-4">
                   <h2 className="text-5xl font-bold tracking-tight">{t('detail_technical')}</h2>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-1bg-black rounded-full"></div>
+                    <div className="w-10 h-1 bg-black rounded-full"></div>
                     <span className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.5em]">SYSTEM BLUEPRINT</span>
                   </div>
                 </div>
