@@ -1,0 +1,53 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-honda",
+      "description": "A high-performance Honda sports motorcycle on a track",
+      "imageUrl": "https://picsum.photos/seed/honda1/1200/600",
+      "imageHint": "honda motorcycle"
+    },
+    {
+      "id": "motor-beat",
+      "description": "Honda Beat Matic Motorcycle",
+      "imageUrl": "https://picsum.photos/seed/beat/600/400",
+      "imageHint": "scooter motorcycle"
+    },
+    {
+      "id": "motor-vario",
+      "description": "Honda Vario 160 Motorcycle",
+      "imageUrl": "https://picsum.photos/seed/vario/600/400",
+      "imageHint": "modern scooter"
+    },
+    {
+      "id": "motor-pcx",
+      "description": "Honda PCX 160 Luxury Scooter",
+      "imageUrl": "https://picsum.photos/seed/pcx/600/400",
+      "imageHint": "luxury scooter"
+    },
+    {
+      "id": "motor-cbr",
+      "description": "Honda CBR150R Sport Bike",
+      "imageUrl": "https://picsum.photos/seed/cbr/600/400",
+      "imageHint": "sport motorcycle"
+    },
+    {
+      "id": "motor-crf",
+      "description": "Honda CRF250 Adventure Bike",
+      "imageUrl": "https://picsum.photos/seed/crf/600/400",
+      "imageHint": "dirt bike"
+    },
+    {
+      "id": "motor-em1",
+      "description": "Honda EM1 e: Electric Scooter",
+      "imageUrl": "https://picsum.photos/seed/em1/600/400",
+      "imageHint": "electric scooter"
+    },
+    {
+      "id": "dealer-interior",
+      "description": "Modern Honda motorcycle showroom",
+      "imageUrl": "https://picsum.photos/seed/dealer/800/600",
+      "imageHint": "motorcycle showroom"
+    }
+  ]
+}

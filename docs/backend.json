@@ -1,0 +1,85 @@
+
+{
+  "entities": {
+    "CreditApplication": {
+      "title": "Credit Application",
+      "description": "A customer request for motorcycle credit financing.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "city": { "type": "string" },
+        "motorcycleId": { "type": "string" },
+        "motorcycleName": { "type": "string" },
+        "dpPercentage": { "type": "number" },
+        "tenure": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "processed", "approved", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "city", "motorcycleId", "status", "createdAt"]
+    },
+    "Motorcycle": {
+      "title": "Motorcycle",
+      "description": "A motorcycle model available in the catalog.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["Matic", "Sport", "Cub", "Adventure", "Electric"] },
+        "startingPrice": { "type": "number" },
+        "image": { "type": "string" },
+        "description_id": { "type": "string" },
+        "description_en": { "type": "string" }
+      },
+      "required": ["id", "name", "category", "startingPrice"]
+    },
+    "Dealer": {
+      "title": "Dealer",
+      "description": "Authorized dealer location.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "mapUrl": { "type": "string" }
+      },
+      "required": ["name", "address", "city", "whatsapp"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "System user profiles including roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "viewer"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com", "password"]
+  },
+  "firestore": {
+    "creditApplications/{applicationId}": {
+      "schema": "CreditApplication",
+      "description": "Customer applications."
+    },
+    "motorcycles/{motorcycleId}": {
+      "schema": "Motorcycle",
+      "description": "Dynamic motorcycle catalog."
+    },
+    "dealers/{dealerId}": {
+      "schema": "Dealer",
+      "description": "Dealer network directory."
+    },
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and roles."
+    }
+  }
+}
