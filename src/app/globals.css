@@ -60,15 +60,15 @@
 }
 
 .sky-gradient-wash {
-  background: radial-gradient(circle at 50% -20%, #cfe7ff 0%, transparent 70%);
+  background: radial-gradient(circle at 50% -20%, #cfe7ff 0%, transparent 60%);
 }
 
 .tracking-expo-display {
-  @apply tracking-[-0.04em];
+  @apply tracking-[-0.03em];
 }
 
 .section-spacing {
-  @apply py-24 md:py-40;
+  @apply py-12 md:py-20;
 }
 
 /* Premium Scrollbar */
@@ -85,7 +85,7 @@
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -96,7 +96,7 @@
 @keyframes scale-up {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
@@ -105,11 +105,11 @@
 }
 
 .animate-expo-entry {
-  animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-scale-entry {
-  animation: scale-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scale-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Utility Classes */
