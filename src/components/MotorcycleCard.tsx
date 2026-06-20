@@ -7,6 +7,7 @@ import { Motorcycle } from '@/app/lib/motorcycles';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { ArrowRight, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface MotorcycleCardProps {
   bike: Motorcycle;
@@ -85,5 +86,3 @@ export function MotorcycleCard({ bike }: MotorcycleCardProps) {
     </div>
   );
 }
-
-import { Button } from '@/components/ui/button';
