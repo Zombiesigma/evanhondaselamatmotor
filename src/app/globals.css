@@ -68,7 +68,7 @@
 }
 
 .section-spacing {
-  @apply py-12 md:py-20;
+  @apply py-8 md:py-16;
 }
 
 /* Premium Scrollbar */
